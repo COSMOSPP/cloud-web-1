@@ -156,19 +156,19 @@ export const hostMemoryRankings = [
 ];
 
 export const vmCpuTop1To5 = [
-  { name: 'xx', value: 28, color: 'orange' },
-  { name: 'xx', value: 21, color: 'blue' },
+  { name: 'xx系统', value: 28, color: 'orange' },
+  { name: 'xx平台', value: 21, color: 'blue' },
   { name: '虚拟机监控系统', value: 20, color: 'blue' },
-  { name: 'xx', value: 16, color: 'blue' },
+  { name: 'xx服务中心', value: 16, color: 'blue' },
   { name: 'xx一体服务', value: 13, color: 'blue' },
 ];
 
 export const vmCpuTop6To10 = [
-  { name: 'xx', value: 12, color: 'blue' },
+  { name: 'xx综合管理', value: 12, color: 'blue' },
   { name: 'xx自监管', value: 11, color: 'blue' },
   { name: '数字动员xx', value: 9, color: 'blue' },
   { name: '数字动员潜力', value: 7, color: 'blue' },
-  { name: 'xx', value: 7, color: 'blue' },
+  { name: 'xx数据枢纽', value: 7, color: 'blue' },
 ];
 
 export const vmMemTop1To5 = [
@@ -176,11 +176,11 @@ export const vmMemTop1To5 = [
   { name: 'xx业务', value: 61, color: 'orange' },
   { name: '数字动员经济', value: 60, color: 'orange' },
   { name: '数字动员xx', value: 60, color: 'orange' },
-  { name: 'xx', value: 59, color: 'orange' },
+  { name: 'xx云端平台', value: 59, color: 'orange' },
 ];
 
 export const vmMemTop6To10 = [
-  { name: 'xx', value: 57, color: 'blue' },
+  { name: 'xx信息终端', value: 57, color: 'blue' },
   { name: '数字动员应用', value: 55, color: 'blue' },
   { name: '数字动员潜力', value: 47, color: 'blue' },
   { name: 'xx自监管', value: 45, color: 'blue' },
