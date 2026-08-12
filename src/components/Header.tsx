@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, HelpCircle, User, Cloud } from 'lucide-react';
+import { Bell, HelpCircle, User, Cloud } from 'lucide-react';
 
 export default function Header() {
   return (
@@ -37,16 +37,6 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-6">
-        {/* Search Input */}
-        <div className="relative">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-200" />
-          <input 
-            type="text" 
-            placeholder="搜索资源、实例、应用..." 
-            className="bg-blue-950/40 border border-blue-400/40 rounded-full py-1.5 pl-10 pr-4 text-xs text-white placeholder:text-blue-200/70 focus:outline-none focus:ring-2 focus:ring-white/50 w-64 transition-all"
-          />
-        </div>
-        
         {/* User & Actions */}
         <div className="flex items-center gap-3">
           <button className="relative p-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-lg transition-colors">

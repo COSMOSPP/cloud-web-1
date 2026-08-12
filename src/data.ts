@@ -3,7 +3,6 @@ export const topStats = [
   { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台', kunpengCount: 18 },
   { id: 'network-nodes', title: 'xx节点', value: 46, unit: '台', kunpengCount: 18 },
   { id: 'vms', title: '虚拟机', value: 358, unit: '台' },
-  { id: 'cpu-architecture', title: 'CPU架构', value: 18, unit: '个', kunpengCount: 18 },
   { id: 'tenants', title: '使用单位', value: 18, unit: '家' },
 ];
 
