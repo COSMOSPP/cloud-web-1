@@ -24,7 +24,7 @@ type DashboardTab = 'overview' | 'host_network' | 'resource_app' | 'rankings';
 
 const tabsConfig = [
   { id: 'overview' as DashboardTab, label: '综合概览', icon: LayoutDashboard, badge: '全览' },
-  { id: 'host_network' as DashboardTab, label: '主机与网络性能', icon: Activity, badge: '实时' },
+  { id: 'host_network' as DashboardTab, label: '主机与xx性能', icon: Activity, badge: '实时' },
   { id: 'resource_app' as DashboardTab, label: '资源池与应用', icon: Layers, badge: '管理' },
   { id: 'rankings' as DashboardTab, label: '排行榜分析', icon: Trophy, badge: 'Top10' },
 ];
@@ -115,7 +115,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Tab 2: 主机与网络性能 View */}
+        {/* Tab 2: 主机与xx性能 View */}
         {activeTab === 'host_network' && (
           <div className="space-y-5">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">

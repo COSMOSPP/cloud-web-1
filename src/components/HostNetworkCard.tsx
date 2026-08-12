@@ -7,7 +7,7 @@ export default function HostNetworkCard() {
   return (
     <Card>
       <CardHeader className="py-3">
-        <CardTitle>总宿主机网络吞吐量</CardTitle>
+        <CardTitle>总宿主机xx吞吐量</CardTitle>
       </CardHeader>
       <CardContent className="p-5 pt-2">
         <div className="w-full h-36">

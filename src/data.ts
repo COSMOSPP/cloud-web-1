@@ -1,7 +1,7 @@
 export const topStats = [
   { id: 'compute-nodes', title: '计算节点', value: 48, unit: '台' },
   { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台' },
-  { id: 'network-nodes', title: '网络节点', value: 46, unit: '台' },
+  { id: 'network-nodes', title: 'xx节点', value: 46, unit: '台' },
   { id: 'vms', title: '虚拟机', value: 358, unit: '台' },
   { id: 'cpu-architecture', title: 'CPU架构', value: 18, unit: '个', kunpengCount: 18 },
   { id: 'tenants', title: '使用单位', value: 18, unit: '家' },
@@ -59,8 +59,8 @@ export const applications = [
   { id: 2, name: '视频平台', unit: '公安局', vms: 22, cpu: 160, memory: 1024, storage: 18, cpuUtil: 68, memoryUtil: 72, storageUtil: 88, status: '运行中' },
   { id: 3, name: '人口平台', unit: '公安局', vms: 8, cpu: 32, memory: 256, storage: 3.2, cpuUtil: 42, memoryUtil: 38, storageUtil: 55, status: '运行中' },
   { id: 4, name: 'HIS系统', unit: '卫健委', vms: 12, cpu: 96, memory: 512, storage: 5, cpuUtil: 38, memoryUtil: 42, storageUtil: 65, status: '运行中' },
-  { id: 5, name: '电子政务', unit: '政府办', vms: 18, cpu: 88, memory: 640, storage: 8, cpuUtil: 52, memoryUtil: 61, storageUtil: 58, status: '运行中' },
-  { id: 6, name: 'OA系统', unit: '教育局', vms: 6, cpu: 24, memory: 128, storage: 1.5, cpuUtil: 18, memoryUtil: 22, storageUtil: 30, status: '运行中' },
+  { id: 5, name: 'xx', unit: '政府办', vms: 18, cpu: 88, memory: 640, storage: 8, cpuUtil: 52, memoryUtil: 61, storageUtil: 58, status: '运行中' },
+  { id: 6, name: 'xx系统', unit: '教育局', vms: 6, cpu: 24, memory: 128, storage: 1.5, cpuUtil: 18, memoryUtil: 22, storageUtil: 30, status: '运行中' },
 ];
 
 export const userInfo = {
@@ -156,19 +156,19 @@ export const hostMemoryRankings = [
 ];
 
 export const vmCpuTop1To5 = [
-  { name: 'xx加密', value: 28, color: 'orange' },
-  { name: 'xx政务内网', value: 21, color: 'blue' },
+  { name: 'xx', value: 28, color: 'orange' },
+  { name: 'xx', value: 21, color: 'blue' },
   { name: '虚拟机监控系统', value: 20, color: 'blue' },
-  { name: 'xx协同平台', value: 16, color: 'blue' },
-  { name: '内网一体服务', value: 13, color: 'blue' },
+  { name: 'xx', value: 16, color: 'blue' },
+  { name: 'xx一体服务', value: 13, color: 'blue' },
 ];
 
 export const vmCpuTop6To10 = [
-  { name: 'xx协同平台', value: 12, color: 'blue' },
+  { name: 'xx', value: 12, color: 'blue' },
   { name: 'xx自监管', value: 11, color: 'blue' },
   { name: '数字动员xx', value: 9, color: 'blue' },
   { name: '数字动员潜力', value: 7, color: 'blue' },
-  { name: 'xx协同平台', value: 7, color: 'blue' },
+  { name: 'xx', value: 7, color: 'blue' },
 ];
 
 export const vmMemTop1To5 = [
@@ -176,15 +176,15 @@ export const vmMemTop1To5 = [
   { name: 'xx业务', value: 61, color: 'orange' },
   { name: '数字动员经济', value: 60, color: 'orange' },
   { name: '数字动员xx', value: 60, color: 'orange' },
-  { name: 'xx协同平台', value: 59, color: 'orange' },
+  { name: 'xx', value: 59, color: 'orange' },
 ];
 
 export const vmMemTop6To10 = [
-  { name: 'xx协同平台', value: 57, color: 'blue' },
+  { name: 'xx', value: 57, color: 'blue' },
   { name: '数字动员应用', value: 55, color: 'blue' },
   { name: '数字动员潜力', value: 47, color: 'blue' },
   { name: 'xx自监管', value: 45, color: 'blue' },
-  { name: '数字动员身份', value: 43, color: 'blue' },
+  { name: '数字动员xx', value: 43, color: 'blue' },
 ];
 
 export const appResourceGroups = [
