@@ -156,34 +156,34 @@ export const hostMemoryRankings = [
 ];
 
 export const vmCpuTop1To5 = [
-  { name: '卫士通涉密加密', value: 28, color: 'orange' },
-  { name: '江苏政务内网', value: 21, color: 'blue' },
+  { name: 'xx加密', value: 28, color: 'orange' },
+  { name: 'xx政务内网', value: 21, color: 'blue' },
   { name: '虚拟机监控系统', value: 20, color: 'blue' },
-  { name: '金山协同平台', value: 16, color: 'blue' },
+  { name: 'xx协同平台', value: 16, color: 'blue' },
   { name: '内网一体服务', value: 13, color: 'blue' },
 ];
 
 export const vmCpuTop6To10 = [
-  { name: '金山协同平台', value: 12, color: 'blue' },
-  { name: '卫士通自监管', value: 11, color: 'blue' },
-  { name: '数字动员军事', value: 9, color: 'blue' },
+  { name: 'xx协同平台', value: 12, color: 'blue' },
+  { name: 'xx自监管', value: 11, color: 'blue' },
+  { name: '数字动员xx', value: 9, color: 'blue' },
   { name: '数字动员潜力', value: 7, color: 'blue' },
-  { name: '金山协同平台', value: 7, color: 'blue' },
+  { name: 'xx协同平台', value: 7, color: 'blue' },
 ];
 
 export const vmMemTop1To5 = [
   { name: '数字动员预案', value: 69, color: 'orange' },
-  { name: '机要密码业务', value: 61, color: 'orange' },
+  { name: 'xx业务', value: 61, color: 'orange' },
   { name: '数字动员经济', value: 60, color: 'orange' },
-  { name: '数字动员军事', value: 60, color: 'orange' },
-  { name: '金山协同平台', value: 59, color: 'orange' },
+  { name: '数字动员xx', value: 60, color: 'orange' },
+  { name: 'xx协同平台', value: 59, color: 'orange' },
 ];
 
 export const vmMemTop6To10 = [
-  { name: '金山协同平台', value: 57, color: 'blue' },
+  { name: 'xx协同平台', value: 57, color: 'blue' },
   { name: '数字动员应用', value: 55, color: 'blue' },
   { name: '数字动员潜力', value: 47, color: 'blue' },
-  { name: '卫士通自监管', value: 45, color: 'blue' },
+  { name: 'xx自监管', value: 45, color: 'blue' },
   { name: '数字动员身份', value: 43, color: 'blue' },
 ];
 
