@@ -1,103 +1,324 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui';
-import { resourcePool } from '../data';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { Cpu, MemoryStick, HardDrive } from 'lucide-react';
+import { cloudResourcePoolData } from '../data';
+import { Cpu, MemoryStick, HardDrive, HelpCircle } from 'lucide-react';
 
-function ResourceDonut({ title, data, unit, color }: { title: string, data: any, unit: string, color: string }) {
-  const chartData = [
-    { name: 'Allocated', value: data.allocated },
-    { name: 'Remaining', value: data.total - data.allocated }
-  ];
-  const allocatedPercent = ((data.allocated / data.total) * 100).toFixed(1);
-  const remainingPercent = (100 - parseFloat(allocatedPercent)).toFixed(1);
+const getGaugeGradientColors = (percent: number): [string, string] => {
+  if (percent > 80) return ['#dc2626', '#ef4444'];
+  if (percent >= 60) return ['#d97706', '#f59e0b'];
+  return ['#059669', '#10b981'];
+};
+
+const getHorizontalBarColor = (percent: number) => {
+  if (percent > 80) return 'bg-gradient-to-r from-red-500 to-rose-500';
+  if (percent >= 60) return 'bg-gradient-to-r from-amber-500 to-orange-500';
+  return 'bg-gradient-to-r from-emerald-500 to-teal-400';
+};
+
+interface ResourceMeterProps {
+  icon: React.ReactNode;
+  title: string;
+  percent: number;
+  total: string;
+  allocated: string;
+  unallocated: string;
+  other?: string;
+  disk?: string;
+  gradientId: string;
+  bgGradient: string;
+}
+
+function ResourceMeterCard({
+  icon,
+  title,
+  percent,
+  total,
+  allocated,
+  unallocated,
+  other,
+  disk,
+  gradientId,
+  bgGradient,
+}: ResourceMeterProps) {
+  const radius = 34;
+  const strokeWidth = 6.5;
+  const normalizedRadius = radius - strokeWidth / 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const strokeDashoffset = circumference - (percent / 100) * circumference;
+  const strokeColors = getGaugeGradientColors(percent);
+
+  const hasExtra = other !== undefined || disk !== undefined;
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="relative w-32 h-32 mb-4">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={chartData}
-              cx="50%"
-              cy="50%"
-              innerRadius={45}
-              outerRadius={60}
-              startAngle={90}
-              endAngle={-270}
-              dataKey="value"
-              stroke="none"
-            >
-              <Cell fill={color} />
-              <Cell fill="#e5e7eb" />
-            </Pie>
-          </PieChart>
-        </ResponsiveContainer>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-sm font-medium text-gray-800">{title}</span>
-          <span className="text-[10px] text-gray-500">总量</span>
-          <span className="text-sm font-bold text-gray-800">{data.total} <span className="text-[10px] font-normal">{unit}</span></span>
+    <div className={`p-4 rounded-xl border border-slate-200/80 ${bgGradient} hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col justify-between group`}>
+      {/* Meter Header */}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-2">
+          <div className="p-1.5 rounded-lg bg-white shadow-2xs border border-slate-100">
+            {icon}
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="text-xs font-bold text-slate-800 tracking-wide">{title}</span>
+            <HelpCircle className="w-3 h-3 text-slate-400 hover:text-slate-600 cursor-pointer" />
+          </div>
+        </div>
+        <span className="text-[10px] font-semibold text-slate-600 bg-white/90 px-2 py-0.5 rounded-full border border-slate-200/60 shadow-2xs">
+          总量 {total}
+        </span>
+      </div>
+
+      {/* Main Metric Section with Radial SVG Gauge */}
+      <div className="flex items-center justify-between my-2 px-1">
+        <div className="flex flex-col">
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">配额分配率</span>
+          <span className="text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5 group-hover:translate-x-0.5 transition-transform origin-left">
+            {percent}<span className="text-sm font-bold text-slate-500 ml-0.5">%</span>
+          </span>
+        </div>
+
+        {/* High-Precision SVG Gauge Ring */}
+        <div className="relative w-20 h-20 flex items-center justify-center shrink-0">
+          <svg height={radius * 2} width={radius * 2} className="transform -rotate-90">
+            <defs>
+              <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor={strokeColors[0]} />
+                <stop offset="100%" stopColor={strokeColors[1]} />
+              </linearGradient>
+            </defs>
+            <circle
+              stroke="#e2e8f0"
+              fill="transparent"
+              strokeWidth={strokeWidth}
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+            />
+            <circle
+              stroke={`url(#${gradientId})`}
+              fill="transparent"
+              strokeWidth={strokeWidth}
+              strokeDasharray={`${circumference} ${circumference}`}
+              style={{ strokeDashoffset }}
+              strokeLinecap="round"
+              r={normalizedRadius}
+              cx={radius}
+              cy={radius}
+              className="transition-all duration-1000 ease-out"
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[11px] font-bold text-slate-700">{percent}%</span>
+          </div>
         </div>
       </div>
-      <div className="w-full text-xs space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-gray-600">
-            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }}></span>
-            已分配
-          </div>
-          <div className="font-medium text-gray-800">{data.allocated} {unit} <span className="text-gray-400 font-normal ml-1">({allocatedPercent}%)</span></div>
+
+      {/* Breakdown Cards (2 columns or 4 columns) */}
+      <div className={`mt-2 pt-3 border-t border-slate-200/60 grid ${hasExtra ? 'grid-cols-2 sm:grid-cols-4' : 'grid-cols-2'} gap-2 text-xs`}>
+        <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
+          <span className="text-[10px] text-slate-400 font-medium">已分配</span>
+          <span className="font-bold text-slate-800 text-xs mt-0.5">{allocated}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-gray-600">
-            <span className="w-2 h-2 rounded-full bg-gray-200"></span>
-            剩余
-          </div>
-          <div className="font-medium text-gray-800">{data.total - data.allocated} {unit} <span className="text-gray-400 font-normal ml-1">({remainingPercent}%)</span></div>
+        <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
+          <span className="text-[10px] text-slate-400 font-medium">未分配</span>
+          <span className="font-bold text-slate-600 text-xs mt-0.5">{unallocated}</span>
         </div>
+        {other !== undefined && (
+          <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
+            <span className="text-[10px] text-slate-400 font-medium">其他</span>
+            <span className="font-bold text-slate-600 text-xs mt-0.5">{other}</span>
+          </div>
+        )}
+        {disk !== undefined && (
+          <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
+            <span className="text-[10px] text-slate-400 font-medium">云硬盘</span>
+            <span className="font-bold text-slate-600 text-xs mt-0.5">{disk}</span>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default function ResourcePool() {
+function HorizontalResourceMeterRow({
+  icon,
+  title,
+  percent,
+  total,
+  allocated,
+  unallocated,
+  other,
+  disk,
+  bgGradient,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  percent: number;
+  total: string;
+  allocated: string;
+  unallocated: string;
+  other?: string;
+  disk?: string;
+  bgGradient: string;
+}) {
+  const barColor = getHorizontalBarColor(percent);
+
   return (
-    <Card className="col-span-5 flex flex-col">
-      <CardHeader>
-        <CardTitle>云资源池</CardTitle>
-      </CardHeader>
-      <CardContent className="flex-1 flex flex-col justify-between">
-        <div className="grid grid-cols-3 gap-6 flex-1 items-center px-4">
-          <ResourceDonut title="CPU" data={resourcePool.cpu} unit="核" color="#2563eb" />
-          <ResourceDonut title="内存" data={resourcePool.memory} unit="GB" color="#059669" />
-          <ResourceDonut title="云硬盘" data={resourcePool.storage} unit="TB" color="#0284c7" />
+    <div className={`p-4 rounded-xl border border-slate-200/80 ${bgGradient} hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-between gap-4 flex-1`}>
+      {/* Icon & Title */}
+      <div className="flex items-center gap-3 w-40 shrink-0">
+        <div className="p-2 rounded-xl bg-white shadow-2xs border border-slate-100/90">
+          {icon}
         </div>
-        
-        <div className="bg-blue-50/50 rounded-xl p-4 mt-6 border border-blue-100/50">
-          <h4 className="text-sm font-medium text-gray-700 mb-3">资源超分配率</h4>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100/50 text-blue-600 rounded-lg"><Cpu className="w-4 h-4" /></div>
-              <div>
-                <div className="text-xs text-gray-500 mb-0.5">CPU 超分配率</div>
-                <div className="font-bold text-gray-800">{resourcePool.overAllocation.cpu}</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-emerald-100/50 text-emerald-600 rounded-lg"><MemoryStick className="w-4 h-4" /></div>
-              <div>
-                <div className="text-xs text-gray-500 mb-0.5">内存 超分配率</div>
-                <div className="font-bold text-gray-800">{resourcePool.overAllocation.memory}</div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-sky-100/50 text-sky-600 rounded-lg"><HardDrive className="w-4 h-4" /></div>
-              <div>
-                <div className="text-xs text-gray-500 mb-0.5">存储 超分配率</div>
-                <div className="font-bold text-gray-800">{resourcePool.overAllocation.storage}</div>
-              </div>
-            </div>
+        <div className="flex flex-col">
+          <span className="text-xs font-bold text-slate-800 tracking-wide">{title}</span>
+          <span className="text-[10px] text-slate-400 font-medium">总量 {total}</span>
+        </div>
+      </div>
+
+      {/* Progress Bar & Percentage */}
+      <div className="flex-1 flex flex-col justify-center px-2">
+        <div className="flex items-center justify-between text-xs mb-1.5">
+          <span className="text-slate-500 font-medium">分配进度</span>
+          <span className="font-extrabold text-slate-900 font-mono text-sm">{percent}%</span>
+        </div>
+        <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">
+          <div
+            className={`h-full ${barColor} rounded-full transition-all duration-500`}
+            style={{ width: `${percent}%` }}
+          ></div>
+        </div>
+      </div>
+
+      {/* Breakdown Details */}
+      <div className="flex items-center gap-4 text-xs shrink-0 pl-3 border-l border-slate-200/70">
+        <div className="flex flex-col items-end">
+          <span className="text-[10px] text-slate-400 font-medium">已分配</span>
+          <span className="font-bold text-slate-800 text-xs mt-0.5">{allocated}</span>
+        </div>
+        <div className="flex flex-col items-end">
+          <span className="text-[10px] text-slate-400 font-medium">未分配</span>
+          <span className="font-semibold text-slate-500 text-xs mt-0.5">{unallocated}</span>
+        </div>
+        {other !== undefined && (
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-slate-400 font-medium">其他</span>
+            <span className="font-semibold text-slate-500 text-xs mt-0.5">{other}</span>
           </div>
+        )}
+        {disk !== undefined && (
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-slate-400 font-medium">云硬盘</span>
+            <span className="font-semibold text-slate-500 text-xs mt-0.5">{disk}</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+interface ResourcePoolProps {
+  className?: string;
+  layout?: 'default' | 'appTab';
+}
+
+export default function ResourcePool({ className = "", layout = "default" }: ResourcePoolProps) {
+  // Variant for 【资源池与应用】 tab
+  if (layout === 'appTab') {
+    return (
+      <Card className={`flex flex-col justify-between h-full ${className}`}>
+        <CardHeader className="py-3.5 shrink-0">
+          <CardTitle>云资源池</CardTitle>
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            资源运行正常
+          </span>
+        </CardHeader>
+        <CardContent className="p-5 flex-1 flex flex-col justify-between gap-3">
+          <HorizontalResourceMeterRow
+            icon={<Cpu className="w-4 h-4 text-blue-600" />}
+            title="CPU分配率"
+            percent={cloudResourcePoolData.cpu.percent}
+            total={cloudResourcePoolData.cpu.total}
+            allocated={cloudResourcePoolData.cpu.allocated}
+            unallocated={cloudResourcePoolData.cpu.unallocated}
+            bgGradient="bg-gradient-to-r from-emerald-50/40 via-slate-50/40 to-white"
+          />
+
+          <HorizontalResourceMeterRow
+            icon={<MemoryStick className="w-4 h-4 text-indigo-600" />}
+            title="内存分配率"
+            percent={cloudResourcePoolData.memory.percent}
+            total={cloudResourcePoolData.memory.total}
+            allocated={cloudResourcePoolData.memory.allocated}
+            unallocated={cloudResourcePoolData.memory.unallocated}
+            bgGradient="bg-gradient-to-r from-emerald-50/40 via-slate-50/40 to-white"
+          />
+
+          <HorizontalResourceMeterRow
+            icon={<HardDrive className="w-4 h-4 text-cyan-600" />}
+            title="存储分配率"
+            percent={cloudResourcePoolData.storage.percent}
+            total={cloudResourcePoolData.storage.total}
+            allocated={cloudResourcePoolData.storage.allocated}
+            unallocated={cloudResourcePoolData.storage.unallocated}
+            other={cloudResourcePoolData.storage.other}
+            disk={cloudResourcePoolData.storage.disk}
+            bgGradient="bg-gradient-to-r from-emerald-50/40 via-slate-50/40 to-white"
+          />
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // Default layout for 【综合概览】 Tab
+  return (
+    <Card className={`flex flex-col justify-between h-full ${className}`}>
+      <CardHeader className="py-3.5 shrink-0">
+        <CardTitle>云资源池</CardTitle>
+        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          资源运行正常
+        </span>
+      </CardHeader>
+      <CardContent className="p-5 flex-1 flex flex-col justify-between gap-5">
+        {/* Row 1: CPU分配率 & 内存分配率 in the same row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 shrink-0">
+          <ResourceMeterCard
+            icon={<Cpu className="w-4 h-4 text-blue-600" />}
+            title="CPU分配率"
+            percent={cloudResourcePoolData.cpu.percent}
+            total={cloudResourcePoolData.cpu.total}
+            allocated={cloudResourcePoolData.cpu.allocated}
+            unallocated={cloudResourcePoolData.cpu.unallocated}
+            gradientId="cpuMeterGrad"
+            bgGradient="bg-gradient-to-br from-slate-50/60 to-white"
+          />
+
+          <ResourceMeterCard
+            icon={<MemoryStick className="w-4 h-4 text-indigo-600" />}
+            title="内存分配率"
+            percent={cloudResourcePoolData.memory.percent}
+            total={cloudResourcePoolData.memory.total}
+            allocated={cloudResourcePoolData.memory.allocated}
+            unallocated={cloudResourcePoolData.memory.unallocated}
+            gradientId="memMeterGrad"
+            bgGradient="bg-gradient-to-br from-slate-50/60 to-white"
+          />
         </div>
+
+        {/* Row 2: 存储分配率 */}
+        <ResourceMeterCard
+          icon={<HardDrive className="w-4 h-4 text-cyan-600" />}
+          title="存储分配率"
+          percent={cloudResourcePoolData.storage.percent}
+          total={cloudResourcePoolData.storage.total}
+          allocated={cloudResourcePoolData.storage.allocated}
+          unallocated={cloudResourcePoolData.storage.unallocated}
+          other={cloudResourcePoolData.storage.other}
+          disk={cloudResourcePoolData.storage.disk}
+          gradientId="diskMeterGrad"
+          bgGradient="bg-gradient-to-br from-slate-50/60 to-white"
+        />
       </CardContent>
     </Card>
   );

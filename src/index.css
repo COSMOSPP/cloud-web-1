@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+/* 消除图表组件点击时的蓝色边框/ Focus Outline */
+.recharts-wrapper,
+.recharts-wrapper *,
+.recharts-surface,
+.recharts-surface:focus,
+.recharts-wrapper:focus,
+.recharts-responsive-container,
+.recharts-responsive-container:focus,
+svg:focus,
+svg *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}

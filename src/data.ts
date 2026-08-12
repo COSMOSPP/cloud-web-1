@@ -1,12 +1,10 @@
 export const topStats = [
-  { id: 'total-servers', title: '服务器总数', value: 126, unit: '台', trend: 12, sparklineData: [10, 15, 12, 18, 14, 20, 25] },
-  { id: 'compute-nodes', title: '计算节点', value: 48, unit: '台', trend: 5, sparklineData: [5, 10, 8, 12, 10, 15, 18] },
-  { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台', trend: 2, sparklineData: [2, 4, 3, 5, 4, 6, 8] },
-  { id: 'network-nodes', title: '网络节点', value: 46, unit: '台', trend: 3, sparklineData: [3, 5, 4, 6, 5, 7, 9] },
-  { id: 'vms', title: '虚拟机', value: 358, unit: '台', trend: 18, sparklineData: [20, 25, 22, 28, 25, 30, 35] },
-  { id: 'tenants', title: '使用单位', value: 18, unit: '家', trend: 2, sparklineData: [1, 2, 1, 3, 2, 4, 5] },
-  { id: 'cpu-util', title: 'CPU利用率', value: 63, unit: '%', trend: -2, sparklineData: [60, 65, 62, 68, 65, 63, 63], isPercent: true },
-  { id: 'health', title: '平台健康度', value: 99.9, unit: '%', trend: 0.1, sparklineData: [99, 99.5, 99.2, 99.8, 99.5, 99.9, 99.9], isPercent: true },
+  { id: 'compute-nodes', title: '计算节点', value: 48, unit: '台' },
+  { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台' },
+  { id: 'network-nodes', title: '网络节点', value: 46, unit: '台' },
+  { id: 'vms', title: '虚拟机', value: 358, unit: '台' },
+  { id: 'cpu-architecture', title: 'CPU架构', value: 18, unit: '个', kunpengCount: 18 },
+  { id: 'tenants', title: '使用单位', value: 18, unit: '家' },
 ];
 
 export const serverNodes = {
@@ -64,3 +62,230 @@ export const applications = [
   { id: 5, name: '电子政务', unit: '政府办', vms: 18, cpu: 88, memory: 640, storage: 8, cpuUtil: 52, memoryUtil: 61, storageUtil: 58, status: '运行中' },
   { id: 6, name: 'OA系统', unit: '教育局', vms: 6, cpu: 24, memory: 128, storage: 1.5, cpuUtil: 18, memoryUtil: 22, storageUtil: 30, status: '运行中' },
 ];
+
+export const userInfo = {
+  username: '系统管理员',
+  role: '系统管理员',
+  lastLogin: '172.18.0.203',
+  currentLogin: '172.18.0.203',
+};
+
+export const myManagement = {
+  userCount: 3,
+  disaster: 0,
+  severe: 0,
+  normal: 0,
+  info: 0,
+};
+
+export const hostNetworkData = [
+  { time: '22:00', send: 1.5, recv: 0.6 },
+  { time: '22:30', send: 2.6, recv: 1.1 },
+  { time: '23:15', send: 1.6, recv: 0.5 },
+  { time: '00:00', send: 1.5, recv: 0.5 },
+  { time: '00:30', send: 2.5, recv: 2.0 },
+  { time: '01:00', send: 1.8, recv: 0.6 },
+  { time: '01:30', send: 4.2, recv: 3.6 },
+  { time: '02:00', send: 1.6, recv: 0.6 },
+  { time: '02:30', send: 2.6, recv: 0.7 },
+  { time: '03:00', send: 1.7, recv: 0.6 },
+  { time: '03:30', send: 7.5, recv: 1.8 },
+  { time: '04:00', send: 8.8, recv: 1.2 },
+  { time: '04:30', send: 2.0, recv: 0.6 },
+  { time: '05:30', send: 1.8, recv: 0.5 },
+  { time: '06:45', send: 2.1, recv: 0.6 },
+  { time: '08:00', send: 1.8, recv: 0.5 },
+];
+
+export const hostNetworkSummary = {
+  sendRate: '5.67 MB/s',
+  recvRate: '1.52 MB/s',
+};
+
+export const hostDiskIOData = [
+  { time: '10:00', io: 8 },
+  { time: '10:05', io: 8 },
+  { time: '10:10', io: 8 },
+  { time: '10:15', io: 78 },
+  { time: '10:20', io: 8 },
+  { time: '10:25', io: 8 },
+];
+
+export const hostCpuUsageData = {
+  rate: '14.50%',
+  points: [
+    { time: '22:00', val: 14.1 },
+    { time: '00:30', val: 16.2 },
+    { time: '03:00', val: 14.4 },
+    { time: '05:30', val: 14.5 },
+    { time: '08:00', val: 14.5 },
+  ]
+};
+
+export const hostMemoryUsageData = {
+  rate: '42.40%',
+  points: [
+    { time: '22:00', val: 42.1 },
+    { time: '00:30', val: 42.4 },
+    { time: '03:00', val: 42.3 },
+    { time: '05:30', val: 42.4 },
+    { time: '08:00', val: 42.4 },
+  ]
+};
+
+export const cloudResourcePoolData = {
+  cpu: { percent: 44.85, total: '4290 核', allocated: '1924 核', unallocated: '2366 核' },
+  memory: { percent: 45.89, total: '11.65 TB', allocated: '5.34 TB', unallocated: '6.31 TB' },
+  storage: { percent: 46.1, total: '453.49 TB', allocated: '209.08 TB', unallocated: '244.41 TB', other: '0 TB', disk: '242 个' },
+};
+
+export const hostCpuRankings = [
+  { name: '节点2-172.18.0.12', value: 21.7 },
+  { name: '节点7-172.18.0.17', value: 18.1 },
+  { name: '节点6-172.18.0.16', value: 17.2 },
+  { name: '节点8-172.18.0.18', value: 15.5 },
+  { name: '节点1-172.18.0.11', value: 12.4 },
+];
+
+export const hostMemoryRankings = [
+  { name: '节点13-172.18.0.34', value: 84.4 },
+  { name: '节点7-172.18.0.17', value: 78.3 },
+  { name: '节点6-172.18.0.16', value: 76.6 },
+  { name: '节点8-172.18.0.18', value: 65.2 },
+  { name: '节点2-172.18.0.12', value: 55.1 },
+];
+
+export const vmCpuTop1To5 = [
+  { name: '卫士通涉密加密', value: 28, color: 'orange' },
+  { name: '江苏政务内网', value: 21, color: 'blue' },
+  { name: '虚拟机监控系统', value: 20, color: 'blue' },
+  { name: '金山协同平台', value: 16, color: 'blue' },
+  { name: '内网一体服务', value: 13, color: 'blue' },
+];
+
+export const vmCpuTop6To10 = [
+  { name: '金山协同平台', value: 12, color: 'blue' },
+  { name: '卫士通自监管', value: 11, color: 'blue' },
+  { name: '数字动员军事', value: 9, color: 'blue' },
+  { name: '数字动员潜力', value: 7, color: 'blue' },
+  { name: '金山协同平台', value: 7, color: 'blue' },
+];
+
+export const vmMemTop1To5 = [
+  { name: '数字动员预案', value: 69, color: 'orange' },
+  { name: '机要密码业务', value: 61, color: 'orange' },
+  { name: '数字动员经济', value: 60, color: 'orange' },
+  { name: '数字动员军事', value: 60, color: 'orange' },
+  { name: '金山协同平台', value: 59, color: 'orange' },
+];
+
+export const vmMemTop6To10 = [
+  { name: '金山协同平台', value: 57, color: 'blue' },
+  { name: '数字动员应用', value: 55, color: 'blue' },
+  { name: '数字动员潜力', value: 47, color: 'blue' },
+  { name: '卫士通自监管', value: 45, color: 'blue' },
+  { name: '数字动员身份', value: 43, color: 'blue' },
+];
+
+export const appResourceGroups = [
+  {
+    id: 'group-1',
+    name: '研发中心',
+    vms: 23,
+    cpu: 152,
+    cpuUtil: 77,
+    memory: 320,
+    memoryUtil: 68,
+    storage: 2500,
+    storageUnit: 'GB',
+    storageUtil: 48,
+    children: [
+      {
+        id: 'app-1-1',
+        name: '代码托管平台',
+        vms: 8,
+        cpu: 32,
+        cpuUtil: 45,
+        memory: 64,
+        memoryUtil: 60,
+        storage: 500,
+        storageUnit: 'GB',
+        storageUtil: 80,
+      },
+      {
+        id: 'app-1-2',
+        name: '持续集成流水线',
+        vms: 15,
+        cpu: 120,
+        cpuUtil: 85,
+        memory: 256,
+        memoryUtil: 70,
+        storage: 2000,
+        storageUnit: 'GB',
+        storageUtil: 40,
+      },
+    ],
+  },
+  {
+    id: 'group-2',
+    name: '金融事业部',
+    vms: 32,
+    cpu: 248,
+    cpuUtil: 46,
+    memory: 784,
+    memoryUtil: 51,
+    storage: 1600,
+    storageUnit: 'GB',
+    storageUtil: 28,
+    children: [
+      {
+        id: 'app-2-1',
+        name: '核心交易系统',
+        vms: 20,
+        cpu: 160,
+        cpuUtil: 25,
+        memory: 512,
+        memoryUtil: 30,
+        storage: 1000,
+        storageUnit: 'GB',
+        storageUtil: 15,
+      },
+      {
+        id: 'app-2-2',
+        name: '风控模型引擎',
+        vms: 10,
+        cpu: 80,
+        cpuUtil: 92,
+        memory: 256,
+        memoryUtil: 95,
+        storage: 500,
+        storageUnit: 'GB',
+        storageUtil: 60,
+      },
+      {
+        id: 'app-2-3',
+        name: '老旧查询模块',
+        vms: 2,
+        cpu: 8,
+        cpuUtil: 5,
+        memory: 16,
+        memoryUtil: 10,
+        storage: 100,
+        storageUnit: 'GB',
+        storageUtil: 5,
+      },
+    ],
+  },
+];
+
+export const provisionedInstances = {
+  vm: {
+    total: 103,
+    running: 102,
+    stopped: 1,
+    other: 0,
+  },
+  disk: {
+    total: 242,
+  },
+};

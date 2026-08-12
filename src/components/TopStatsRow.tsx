@@ -1,60 +1,43 @@
 import React from 'react';
 import { Card } from './ui';
-import { Server, Cpu, Database, Network, Monitor, Building2, Activity, ShieldCheck, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Cpu, Database, Network, Monitor, Building2, Layers } from 'lucide-react';
 import { topStats } from '../data';
-import { ResponsiveContainer, LineChart, Line } from 'recharts';
 
-const iconMap: Record<string, React.ReactNode> = {
-  'total-servers': <Server className="w-5 h-5 text-blue-600" />,
-  'compute-nodes': <Cpu className="w-5 h-5 text-indigo-600" />,
-  'storage-nodes': <Database className="w-5 h-5 text-sky-600" />,
-  'network-nodes': <Network className="w-5 h-5 text-purple-600" />,
-  'vms': <Monitor className="w-5 h-5 text-blue-500" />,
-  'tenants': <Building2 className="w-5 h-5 text-indigo-500" />,
-  'cpu-util': <Activity className="w-5 h-5 text-blue-600" />,
-  'health': <ShieldCheck className="w-5 h-5 text-emerald-500" />,
+const iconConfig: Record<string, { icon: React.ReactNode; bg: string }> = {
+  'compute-nodes': { icon: <Cpu className="w-5 h-5 text-indigo-600" />, bg: 'bg-indigo-50/80 group-hover:bg-indigo-100/80' },
+  'storage-nodes': { icon: <Database className="w-5 h-5 text-sky-600" />, bg: 'bg-sky-50/80 group-hover:bg-sky-100/80' },
+  'network-nodes': { icon: <Network className="w-5 h-5 text-purple-600" />, bg: 'bg-purple-50/80 group-hover:bg-purple-100/80' },
+  'vms': { icon: <Monitor className="w-5 h-5 text-emerald-600" />, bg: 'bg-emerald-50/80 group-hover:bg-emerald-100/80' },
+  'cpu-architecture': { icon: <Layers className="w-5 h-5 text-teal-600" />, bg: 'bg-teal-50/80 group-hover:bg-teal-100/80' },
+  'tenants': { icon: <Building2 className="w-5 h-5 text-amber-600" />, bg: 'bg-amber-50/80 group-hover:bg-amber-100/80' },
 };
 
 export default function TopStatsRow() {
   return (
-    <div className="grid grid-cols-8 gap-4 mb-4">
-      {topStats.map((stat) => {
-        const isPositive = stat.trend >= 0;
-        const trendColor = isPositive ? 'text-emerald-500' : 'text-red-500';
-        const TrendIcon = isPositive ? ArrowUpRight : ArrowDownRight;
-        const chartData = stat.sparklineData.map((v, i) => ({ val: v, idx: i }));
-        const strokeColor = isPositive ? '#10b981' : '#ef4444';
-
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mb-5">
+      {topStats.map((stat: any) => {
+        const config = iconConfig[stat.id] || { icon: <Cpu className="w-5 h-5 text-blue-600" />, bg: 'bg-blue-50' };
         return (
-          <Card key={stat.id} className="p-4 flex flex-col justify-between">
-            <div className="flex items-start justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 bg-blue-50 rounded-lg">
-                  {iconMap[stat.id]}
-                </div>
-                <span className="text-sm text-gray-500 font-medium">{stat.title}</span>
+          <Card key={stat.id} className="p-5 flex flex-col justify-between group hover:-translate-y-0.5 transition-all duration-200 cursor-pointer">
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className={`p-2 rounded-xl transition-colors duration-200 ${config.bg}`}>
+                {config.icon}
               </div>
+              <span className="text-xs font-semibold text-slate-500 tracking-wide">{stat.title}</span>
             </div>
             
-            <div className="flex items-baseline gap-1 my-1">
-              <span className="text-2xl font-bold text-gray-800">{stat.value}</span>
-              <span className="text-xs text-gray-500">{stat.unit}</span>
-            </div>
-
-            <div className="flex items-center justify-between mt-2">
-              <div className={`flex items-center text-xs font-medium ${trendColor}`}>
-                <TrendIcon className="w-3 h-3 mr-0.5" />
-                {Math.abs(stat.trend)}{stat.isPercent ? '%' : stat.unit}
+            <div className="flex items-baseline justify-between mt-auto">
+              <div className="flex items-baseline gap-1">
+                <span className="text-2xl font-bold text-slate-900 tracking-tight">{stat.value}</span>
+                <span className="text-xs font-medium text-slate-400">{stat.unit}</span>
               </div>
-              
-              <div className="w-12 h-6">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={chartData}>
-                    <Line type="monotone" dataKey="val" stroke={strokeColor} strokeWidth={2} dot={false} isAnimationActive={false} />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-              <span className="text-[10px] text-gray-400">较昨日</span>
+              {stat.kunpengCount !== undefined ? (
+                <span className="text-xs font-semibold text-slate-600 bg-slate-100/90 px-2 py-0.5 rounded-md border border-slate-200/80 group-hover:bg-teal-50 group-hover:text-teal-700 group-hover:border-teal-200/60 transition-colors">
+                  鲲鹏 {stat.kunpengCount}个
+                </span>
+              ) : (
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 group-hover:bg-blue-600 group-hover:scale-125 transition-all"></span>
+              )}
             </div>
           </Card>
         );
