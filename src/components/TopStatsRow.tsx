@@ -31,7 +31,7 @@ export default function TopStatsRow() {
                 <span className="text-xs font-medium text-slate-400">{stat.unit}</span>
               </div>
               {stat.kunpengCount !== undefined ? (
-                <span className="text-xs font-semibold text-slate-600 bg-slate-100/90 px-2 py-0.5 rounded-md border border-slate-200/80 group-hover:bg-teal-50 group-hover:text-teal-700 group-hover:border-teal-200/60 transition-colors">
+                <span className="text-xs font-semibold text-slate-600 bg-slate-100/90 px-2 py-0.5 rounded-md border border-slate-200/80">
                   xx {stat.kunpengCount}个
                 </span>
               ) : (
