@@ -1,7 +1,7 @@
 export const topStats = [
-  { id: 'compute-nodes', title: '计算节点', value: 48, unit: '台', kunpengCount: 18 },
-  { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台', kunpengCount: 18 },
-  { id: 'network-nodes', title: 'xx节点', value: 46, unit: '台', kunpengCount: 18 },
+  { id: 'compute-nodes', title: '计算节点', value: 48, unit: '台', arch: 'CPU架构：鲲鹏' },
+  { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台', arch: 'CPU架构：鲲鹏' },
+  { id: 'network-nodes', title: '网络节点', value: 46, unit: '台', arch: 'CPU架构：鲲鹏' },
   { id: 'vms', title: '虚拟机', value: 358, unit: '台' },
   { id: 'tenants', title: '使用单位', value: 18, unit: '家' },
 ];
@@ -135,7 +135,7 @@ export const hostMemoryUsageData = {
 export const cloudResourcePoolData = {
   cpu: { percent: 44.85, total: '4290 核', allocated: '1924 核', unallocated: '2366 核' },
   memory: { percent: 45.89, total: '11.65 TB', allocated: '5.34 TB', unallocated: '6.31 TB' },
-  storage: { percent: 46.1, total: '453.49 TB', allocated: '209.08 TB', unallocated: '244.41 TB', other: '0 TB', disk: '242 个' },
+  storage: { percent: 46.1, total: '453.49 TB', allocated: '209.08 TB', unallocated: '244.41 TB', other: '0 TB', disk: '242 TB' },
 };
 
 export const hostCpuRankings = [

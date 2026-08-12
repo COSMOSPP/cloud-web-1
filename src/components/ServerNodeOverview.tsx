@@ -51,9 +51,9 @@ export default function ServerNodeOverview() {
         />
         <NodeRow 
           icon={<Network className="w-6 h-6" />}
-          title="xx节点"
+          title="网络节点"
           data={serverNodes.network}
-          details={<><span>xx带宽 <strong className="text-gray-700">{serverNodes.network.bandwidth}</strong> G</span></>}
+          details={<><span>网络带宽 <strong className="text-gray-700">{serverNodes.network.bandwidth}</strong> G</span></>}
         />
       </CardContent>
     </Card>

@@ -70,7 +70,6 @@ function ResourceMeterCard({
       {/* Main Metric Section with Radial SVG Gauge */}
       <div className="flex items-center justify-between my-2 px-1">
         <div className="flex flex-col">
-          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">配额分配率</span>
           <span className="text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5 group-hover:translate-x-0.5 transition-transform origin-left">
             {percent}<span className="text-sm font-bold text-slate-500 ml-0.5">%</span>
           </span>
@@ -178,7 +177,7 @@ function HorizontalResourceMeterRow({
       {/* Progress Bar & Percentage */}
       <div className="flex-1 flex flex-col justify-center px-2">
         <div className="flex items-center justify-between text-xs mb-1.5">
-          <span className="text-slate-500 font-medium">分配进度</span>
+          <span className="text-slate-500 font-medium">分配率</span>
           <span className="font-extrabold text-slate-900 font-mono text-sm">{percent}%</span>
         </div>
         <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">
@@ -228,10 +227,6 @@ export default function ResourcePool({ className = "", layout = "default" }: Res
       <Card className={`flex flex-col justify-between h-full ${className}`}>
         <CardHeader className="py-3.5 shrink-0">
           <CardTitle>云资源池</CardTitle>
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            资源运行正常
-          </span>
         </CardHeader>
         <CardContent className="p-5 flex-1 flex flex-col justify-between gap-3">
           <HorizontalResourceMeterRow
@@ -275,10 +270,6 @@ export default function ResourcePool({ className = "", layout = "default" }: Res
     <Card className={`flex flex-col justify-between h-full ${className}`}>
       <CardHeader className="py-3.5 shrink-0">
         <CardTitle>云资源池</CardTitle>
-        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/60">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          资源运行正常
-        </span>
       </CardHeader>
       <CardContent className="p-5 flex-1 flex flex-col justify-between gap-5">
         {/* Row 1: CPU分配率 & 内存分配率 in the same row */}
