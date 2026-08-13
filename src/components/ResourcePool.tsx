@@ -121,16 +121,16 @@ function ResourceMeterCard({
           <span className="text-[10px] text-slate-400 font-medium">未分配</span>
           <span className="font-bold text-slate-600 text-xs mt-0.5">{unallocated}</span>
         </div>
-        {other !== undefined && (
-          <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
-            <span className="text-[10px] text-slate-400 font-medium">其他</span>
-            <span className="font-bold text-slate-600 text-xs mt-0.5">{other}</span>
-          </div>
-        )}
         {disk !== undefined && (
           <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
             <span className="text-[10px] text-slate-400 font-medium">云硬盘</span>
             <span className="font-bold text-slate-600 text-xs mt-0.5">{disk}</span>
+          </div>
+        )}
+        {other !== undefined && (
+          <div className="flex flex-col bg-white/80 p-2 rounded-lg border border-slate-100/80">
+            <span className="text-[10px] text-slate-400 font-medium">其他</span>
+            <span className="font-bold text-slate-600 text-xs mt-0.5">{other}</span>
           </div>
         )}
       </div>
@@ -198,16 +198,16 @@ function HorizontalResourceMeterRow({
           <span className="text-[10px] text-slate-400 font-medium">未分配</span>
           <span className="font-semibold text-slate-500 text-xs mt-0.5">{unallocated}</span>
         </div>
-        {other !== undefined && (
-          <div className="flex flex-col items-end">
-            <span className="text-[10px] text-slate-400 font-medium">其他</span>
-            <span className="font-semibold text-slate-500 text-xs mt-0.5">{other}</span>
-          </div>
-        )}
         {disk !== undefined && (
           <div className="flex flex-col items-end">
             <span className="text-[10px] text-slate-400 font-medium">云硬盘</span>
             <span className="font-semibold text-slate-500 text-xs mt-0.5">{disk}</span>
+          </div>
+        )}
+        {other !== undefined && (
+          <div className="flex flex-col items-end">
+            <span className="text-[10px] text-slate-400 font-medium">其他</span>
+            <span className="font-semibold text-slate-500 text-xs mt-0.5">{other}</span>
           </div>
         )}
       </div>

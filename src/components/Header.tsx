@@ -11,8 +11,7 @@ export default function Header() {
             <Cloud className="w-5 h-5 text-white" />
           </div>
           <div className="flex flex-col">
-            <h1 className="text-base font-bold tracking-wider text-white font-sans">虚拟化云管平台</h1>
-            <span className="text-[10px] text-blue-200 -mt-0.5 tracking-wider font-mono uppercase">Cloud Management Platform</span>
+            <h1 className="text-base font-bold tracking-wider text-white font-sans">服务器虚拟化管理系统v2.0</h1>
           </div>
         </div>
         

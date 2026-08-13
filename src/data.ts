@@ -3,7 +3,7 @@ export const topStats = [
   { id: 'storage-nodes', title: '存储节点', value: 32, unit: '台', arch: 'CPU架构：鲲鹏' },
   { id: 'network-nodes', title: '网络节点', value: 46, unit: '台', arch: 'CPU架构：鲲鹏' },
   { id: 'vms', title: '虚拟机', value: 358, unit: '台' },
-  { id: 'tenants', title: '使用单位', value: 18, unit: '家' },
+  { id: 'tenants', title: '使用组织', value: 18, unit: '家' },
 ];
 
 export const serverNodes = {

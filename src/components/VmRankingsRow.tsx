@@ -39,10 +39,10 @@ function VmRankingCard({ title, items }: { title: string; items: RankingItem[] }
 export default function VmRankingsRow() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <VmRankingCard title="虚拟机CPU TOP1–5" items={vmCpuTop1To5} />
-      <VmRankingCard title="虚拟机CPU TOP6–10" items={vmCpuTop6To10} />
-      <VmRankingCard title="虚拟机内存 TOP1–5" items={vmMemTop1To5} />
-      <VmRankingCard title="虚拟机内存 TOP6–10" items={vmMemTop6To10} />
+      <VmRankingCard title="虚拟机CPU使用率 TOP1–5" items={vmCpuTop1To5} />
+      <VmRankingCard title="虚拟机CPU使用率 TOP6–10" items={vmCpuTop6To10} />
+      <VmRankingCard title="虚拟机内存使用率 TOP1–5" items={vmMemTop1To5} />
+      <VmRankingCard title="虚拟机内存使用率 TOP6–10" items={vmMemTop6To10} />
     </div>
   );
 }

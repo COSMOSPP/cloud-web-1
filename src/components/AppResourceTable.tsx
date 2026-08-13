@@ -157,7 +157,7 @@ export default function AppResourceTable({ className = "" }: { className?: strin
               type="text" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="搜索应用名称或单位" 
+              placeholder="搜索组织/应用" 
               className="bg-gray-50 border border-gray-200 rounded-md py-1.5 pl-9 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 w-64 transition-all"
             />
           </div>
