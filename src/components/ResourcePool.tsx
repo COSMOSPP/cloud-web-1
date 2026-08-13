@@ -226,7 +226,7 @@ export default function ResourcePool({ className = "", layout = "default" }: Res
     return (
       <Card className={`flex flex-col justify-between h-full ${className}`}>
         <CardHeader className="py-3.5 shrink-0">
-          <CardTitle>云资源池</CardTitle>
+          <CardTitle>资源分配率</CardTitle>
         </CardHeader>
         <CardContent className="p-5 flex-1 flex flex-col justify-between gap-3">
           <HorizontalResourceMeterRow
@@ -269,7 +269,7 @@ export default function ResourcePool({ className = "", layout = "default" }: Res
   return (
     <Card className={`flex flex-col justify-between h-full ${className}`}>
       <CardHeader className="py-3.5 shrink-0">
-        <CardTitle>云资源池</CardTitle>
+        <CardTitle>资源分配率</CardTitle>
       </CardHeader>
       <CardContent className="p-5 flex-1 flex flex-col justify-between gap-5">
         {/* Row 1: CPU分配率 & 内存分配率 in the same row */}
