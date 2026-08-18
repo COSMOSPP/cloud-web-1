@@ -1,40 +1,66 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui';
-import { ResponsiveContainer, LineChart, Line, XAxis, CartesianGrid } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { hostDiskIOData } from '../data';
 
 export default function HostDiskIOCard() {
   return (
     <Card>
-      <CardHeader className="py-3">
-        <CardTitle>总宿主机磁盘 IO</CardTitle>
+      <CardHeader className="pb-1">
+        <CardTitle>总宿主机磁盘IO</CardTitle>
       </CardHeader>
-      <CardContent className="p-5 pt-2">
-        <div className="w-full h-36">
+      <CardContent className="p-2.5 pt-0">
+        <div className="w-full h-28">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={hostDiskIOData} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
-              <CartesianGrid vertical={false} stroke="#f1f5f9" strokeDasharray="3 3" />
+            <LineChart data={hostDiskIOData.points} margin={{ top: 12, right: 8, left: -22, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
               <XAxis
                 dataKey="time"
+                ticks={['19:00', '22:00', '01:00', '04:00', '07:00']}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 10, fill: '#94a3b8' }}
+                tick={{ fontSize: 9, fill: '#64748b' }}
+              />
+              <YAxis
+                domain={[0, 1.2]}
+                ticks={[0, 0.3, 0.6, 0.9, 1.2]}
+                tickFormatter={(val) => `${val}qps`}
+                axisLine={false}
+                tickLine={false}
+                tick={{ fontSize: 9, fill: '#64748b' }}
               />
               <Line
                 type="monotone"
-                dataKey="io"
-                stroke="#ea580c"
-                strokeWidth={2}
-                dot={{ r: 2, stroke: '#ea580c', strokeWidth: 1, fill: '#fff' }}
+                dataKey="read"
+                stroke="#1d5bf0"
+                strokeWidth={1.5}
+                dot={false}
+                isAnimationActive={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="write"
+                stroke="#f97316"
+                strokeWidth={1.5}
+                dot={false}
                 isAnimationActive={false}
               />
             </LineChart>
           </ResponsiveContainer>
         </div>
-        <div className="flex items-center justify-center gap-2 mt-3 text-xs">
-          <span className="w-2.5 h-2.5 border border-amber-600 bg-white rounded-full inline-block"></span>
-          <span className="text-slate-500">IO 峰值</span>
-          <span className="font-semibold text-slate-800">78 MB/s</span>
+
+        {/* Legend Footer */}
+        <div className="flex items-center justify-center gap-4 mt-0.5 text-[11px] text-slate-600 font-medium">
+          <div className="flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-[#1d5bf0] inline-block"></span>
+            <span>读</span>
+            <span className="font-bold text-slate-900 font-mono ml-0.5">{hostDiskIOData.readRate}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <span className="w-2 h-2 rounded-full bg-orange-500 inline-block"></span>
+            <span>写</span>
+            <span className="font-bold text-slate-900 font-mono ml-0.5">{hostDiskIOData.writeRate}</span>
+          </div>
         </div>
       </CardContent>
     </Card>

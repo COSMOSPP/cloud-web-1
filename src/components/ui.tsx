@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function Card({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("bg-white rounded-2xl shadow-[0_2px_10px_-3px_rgba(15,23,42,0.06),0_1px_4px_-2px_rgba(15,23,42,0.04)] border border-slate-200/80 hover:border-blue-200/80 transition-all duration-200 flex flex-col overflow-hidden", className)} {...props}>
+    <div className={cn("bg-white rounded-md shadow-2xs border border-slate-200/90 flex flex-col overflow-hidden", className)} {...props}>
       {children}
     </div>
   );
@@ -16,7 +16,7 @@ export function Card({ className, children, ...props }: React.HTMLAttributes<HTM
 
 export function CardHeader({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("px-5 py-3.5 border-b border-slate-100/90 flex items-center justify-between bg-slate-50/40", className)} {...props}>
+    <div className={cn("px-3 py-2 border-b border-slate-100 flex items-center justify-between bg-white", className)} {...props}>
       {children}
     </div>
   );
@@ -24,8 +24,8 @@ export function CardHeader({ className, children, ...props }: React.HTMLAttribut
 
 export function CardTitle({ className, children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
-    <h3 className={cn("text-sm font-bold text-slate-800 flex items-center gap-2 tracking-wide", className)} {...props}>
-      <span className="w-1.5 h-4 bg-gradient-to-b from-blue-600 to-indigo-600 rounded-full shrink-0 shadow-sm"></span>
+    <h3 className={cn("text-xs sm:text-sm font-bold text-slate-800 flex items-center tracking-tight", className)} {...props}>
+      <span className="w-[3.5px] h-3.5 bg-[#1d5bf0] rounded-2xs shrink-0 inline-block mr-2"></span>
       <span>{children}</span>
     </h3>
   );
@@ -33,7 +33,7 @@ export function CardTitle({ className, children, ...props }: React.HTMLAttribute
 
 export function CardContent({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("p-5 flex-1", className)} {...props}>
+    <div className={cn("p-2.5 flex-1", className)} {...props}>
       {children}
     </div>
   );

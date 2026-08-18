@@ -1,62 +1,59 @@
 import React from 'react';
-import { Bell, HelpCircle, User, Cloud } from 'lucide-react';
+import { ShoppingCart, Bell, Maximize2, ChevronDown, Server } from 'lucide-react';
 
 export default function Header() {
   return (
-    <header className="bg-[#083cb0] text-white h-16 flex items-center justify-between px-5 shadow-md sticky top-0 z-50">
-      <div className="flex items-center gap-8 h-full">
-        {/* Logo & Brand */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center shadow-sm">
-            <Cloud className="w-5 h-5 text-white" />
-          </div>
-          <div className="flex flex-col">
-            <h1 className="text-base font-bold tracking-wider text-white font-sans">服务器虚拟化管理系统v2.0</h1>
-          </div>
+    <header className="bg-[#185adb] text-white h-12 flex items-center justify-between px-4 shadow-sm sticky top-0 z-50 text-xs sm:text-sm">
+      {/* Left section: Logo & Nav */}
+      <div className="flex items-center gap-6 h-full">
+        {/* Brand */}
+        <div className="flex items-center gap-2 font-bold tracking-tight text-white text-base shrink-0">
+          <Server className="w-5 h-5 text-blue-100" />
+          <span>服务器虚拟化管理系统v2.0</span>
         </div>
-        
-        {/* Nav tabs */}
-        <nav className="flex h-full ml-4">
-          {['首页', '产品中心', '运维中心', '管理中心'].map((item, idx) => (
+
+        {/* Nav Tabs */}
+        <nav className="hidden md:flex items-center h-full ml-2 space-x-1">
+          {[
+            { label: '首页', active: true, hasArrow: false },
+            { label: '资源中心', active: false, hasArrow: true },
+            { label: '运维中心', active: false, hasArrow: true },
+            { label: '运营中心', active: false, hasArrow: false },
+            { label: '管理中心', active: false, hasArrow: true },
+          ].map((item) => (
             <button
-              key={item}
-              className={`h-full px-5 flex items-center text-sm font-medium transition-all relative ${
-                idx === 0
-                  ? 'bg-blue-600/50 text-white font-semibold'
-                  : 'text-blue-100/80 hover:text-white hover:bg-white/10'
+              key={item.label}
+              className={`h-full px-3.5 flex items-center gap-1 font-medium transition-all cursor-pointer ${
+                item.active
+                  ? 'bg-blue-600/80 text-white font-bold border-b-2 border-white'
+                  : 'text-blue-100 hover:bg-white/10 hover:text-white'
               }`}
             >
-              {item}
-              {idx === 0 && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-white rounded-t-full shadow-sm"></span>
-              )}
+              <span>{item.label}</span>
+              {item.hasArrow && <ChevronDown className="w-3.5 h-3.5 opacity-80" />}
             </button>
           ))}
         </nav>
       </div>
 
-      <div className="flex items-center gap-6">
-        {/* User & Actions */}
-        <div className="flex items-center gap-3">
-          <button className="relative p-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-            <Bell className="w-4 h-4" />
-            <span className="absolute top-1.5 right-1.5 bg-red-500 text-white text-[9px] font-bold w-3.5 h-3.5 flex items-center justify-center rounded-full border border-[#083cb0]">12</span>
-          </button>
-          <button className="p-2 text-blue-100 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
-            <HelpCircle className="w-4 h-4" />
-          </button>
-          
-          <div className="h-4 w-px bg-blue-400/30 mx-1"></div>
+      {/* Right section: Action Icons & Account */}
+      <div className="flex items-center gap-4 text-blue-100">
+        <button className="hover:text-white transition-colors cursor-pointer p-1" title="购物车">
+          <ShoppingCart className="w-4 h-4" />
+        </button>
+        <button className="hover:text-white transition-colors cursor-pointer p-1 relative" title="消息通知">
+          <Bell className="w-4 h-4" />
+        </button>
+        <button className="hover:text-white transition-colors cursor-pointer p-1" title="全屏">
+          <Maximize2 className="w-3.5 h-3.5" />
+        </button>
 
-          <div className="flex items-center gap-2.5 cursor-pointer hover:bg-white/10 py-1.5 px-2.5 rounded-xl transition-all border border-transparent">
-            <div className="w-7 h-7 bg-white/20 border border-white/30 rounded-full flex items-center justify-center shadow-sm">
-              <User className="w-4 h-4 text-white" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-semibold text-white leading-none">admin</span>
-              <span className="text-[10px] text-blue-200 font-medium mt-1">超级管理员</span>
-            </div>
-          </div>
+        <div className="h-3.5 w-px bg-blue-400/40"></div>
+
+        {/* Account Dropdown */}
+        <div className="flex items-center gap-1.5 cursor-pointer hover:text-white text-xs font-mono font-medium">
+          <span>107300006863@qq.com</span>
+          <ChevronDown className="w-3.5 h-3.5" />
         </div>
       </div>
     </header>

@@ -6,63 +6,56 @@ import { provisionedInstances } from '../data';
 export default function ProvisionedInstancesCard() {
   return (
     <Card>
-      <CardHeader className="py-3">
+      <CardHeader>
         <CardTitle>已开通实例数量</CardTitle>
       </CardHeader>
-      <CardContent className="p-5">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-5 px-2">
-          {/* Virtual Machines Section */}
-          <div className="flex items-center gap-8">
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
-                <div className="p-1 bg-blue-50 text-blue-600 rounded">
-                  <Monitor className="w-4 h-4" />
-                </div>
-                <span>虚拟机</span>
+      <CardContent className="p-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+          {/* Left Panel: 虚拟机 */}
+          <div className="bg-[#f7f8fa] border border-slate-200/60 px-3 py-2.5 rounded-md flex items-center justify-between flex-wrap gap-2">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-md bg-[#eef3fe] border border-blue-100 flex items-center justify-center text-[#1d5bf0] shrink-0">
+                <Monitor className="w-5 h-5" />
               </div>
-              <span className="text-3xl font-bold text-gray-900 mt-1">{provisionedInstances.vm.total}</span>
+              <div className="flex items-baseline gap-2">
+                <span className="text-xs font-semibold text-slate-700">虚拟机</span>
+                <span className="text-xl font-extrabold text-slate-900 font-mono tracking-tight">
+                  {provisionedInstances.vm.total}
+                </span>
+              </div>
             </div>
 
-            {/* VM Status breakdown */}
-            <div className="flex flex-col gap-2 text-xs border-l border-gray-100 pl-6 py-1">
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 text-gray-600">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 flex items-center justify-center text-[8px] text-white">✓</span>
-                  <span>已开机</span>
-                </div>
-                <span className="font-semibold text-gray-800">{provisionedInstances.vm.running}</span>
+            {/* Horizontal Status Indicators */}
+            <div className="flex items-center gap-3 text-xs text-slate-600 font-medium">
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                <span>已开机:</span>
+                <span className="font-bold text-slate-900 font-mono">{provisionedInstances.vm.running}</span>
               </div>
-
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 text-gray-600">
-                  <span className="w-2.5 h-2.5 rounded-full bg-gray-400 flex items-center justify-center text-[8px] text-white">-</span>
-                  <span>已关机</span>
-                </div>
-                <span className="font-semibold text-gray-800">{provisionedInstances.vm.stopped}</span>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-slate-400 inline-block"></span>
+                <span>已关机:</span>
+                <span className="font-bold text-slate-900 font-mono">{provisionedInstances.vm.stopped}</span>
               </div>
-
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 text-gray-600">
-                  <span className="w-2.5 h-2.5 rounded-full bg-gray-300 flex items-center justify-center text-[8px] text-white">•</span>
-                  <span>其他</span>
-                </div>
-                <span className="font-semibold text-gray-800">{provisionedInstances.vm.other}</span>
+              <div className="flex items-center gap-1">
+                <span className="w-2 h-2 rounded-full bg-slate-300 inline-block"></span>
+                <span>其他:</span>
+                <span className="font-bold text-slate-900 font-mono">{provisionedInstances.vm.other}</span>
               </div>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="hidden md:block w-px h-12 bg-gray-100 mx-4"></div>
-
-          {/* Virtual Disks Section */}
-          <div className="flex flex-col gap-1 pr-12">
-            <div className="flex items-center gap-2 text-sm font-medium text-gray-700">
-              <div className="p-1 bg-blue-50 text-blue-600 rounded">
-                <HardDrive className="w-4 h-4" />
-              </div>
-              <span>虚拟磁盘</span>
+          {/* Right Panel: 虚拟磁盘 */}
+          <div className="bg-[#f7f8fa] border border-slate-200/60 px-3 py-2.5 rounded-md flex items-center gap-3">
+            <div className="w-9 h-9 rounded-md bg-[#eef3fe] border border-blue-100 flex items-center justify-center text-[#1d5bf0] shrink-0">
+              <HardDrive className="w-5 h-5" />
             </div>
-            <span className="text-3xl font-bold text-gray-900 mt-1">{provisionedInstances.disk.total}</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-xs font-semibold text-slate-700">虚拟磁盘</span>
+              <span className="text-xl font-extrabold text-slate-900 font-mono tracking-tight">
+                {provisionedInstances.disk.total}
+              </span>
+            </div>
           </div>
         </div>
       </CardContent>

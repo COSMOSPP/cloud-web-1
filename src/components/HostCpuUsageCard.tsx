@@ -1,42 +1,65 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from './ui';
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, ReferenceDot, CartesianGrid } from 'recharts';
 import { hostCpuUsageData } from '../data';
 
 export default function HostCpuUsageCard() {
   return (
     <Card>
-      <CardHeader className="py-3 flex-col items-start gap-1">
+      <CardHeader className="flex-col items-start gap-0.5 pb-1">
         <CardTitle>总宿主机CPU使用率</CardTitle>
-        <div className="text-xs text-gray-700 font-medium">
-          当前负载率: <span className="font-bold">{hostCpuUsageData.rate}</span>
+        <div className="text-[11px] text-slate-500 font-medium">
+          当前负载率：<span className="font-bold text-slate-900 font-mono">{hostCpuUsageData.rate}</span>
         </div>
       </CardHeader>
-      <CardContent className="p-4 pt-1">
-        <div className="w-full h-32">
+      <CardContent className="p-2.5 pt-0">
+        <div className="w-full h-28 relative">
+          {/* Static Callout Marker */}
+          <div className="absolute left-[54%] top-[14%] -translate-x-1/2 z-10 bg-white border border-slate-200 px-1.5 py-0.2 rounded shadow-2xs text-[9px] font-bold text-slate-700 pointer-events-none flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#1d5bf0]"></span>
+            <span>负载率 6.52%</span>
+          </div>
+
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={hostCpuUsageData.points} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+            <AreaChart data={hostCpuUsageData.points} margin={{ top: 16, right: 8, left: -28, bottom: 0 }}>
               <defs>
                 <linearGradient id="cpuGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.02}/>
+                  <stop offset="5%" stopColor="#1d5bf0" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#1d5bf0" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
               <XAxis
                 dataKey="time"
+                ticks={['19:00', '22:00', '01:00', '04:00', '07:00']}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 10, fill: '#9ca3af' }}
+                tick={{ fontSize: 9, fill: '#64748b' }}
               />
               <YAxis
-                domain={[0, 18]}
-                ticks={[0, 5, 10, 15, 17]}
-                unit="%"
+                domain={[0, 12]}
+                ticks={[0, 3, 6, 9, 12]}
+                tickFormatter={(val) => `${val}%`}
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 10, fill: '#9ca3af' }}
+                tick={{ fontSize: 9, fill: '#64748b' }}
               />
-              <Area type="monotone" dataKey="val" stroke="#3b82f6" strokeWidth={2} fill="url(#cpuGradient)" isAnimationActive={false} />
+              <Area
+                type="monotone"
+                dataKey="val"
+                stroke="#1d5bf0"
+                strokeWidth={1.5}
+                fill="url(#cpuGradient)"
+                isAnimationActive={false}
+              />
+              <ReferenceDot
+                x="01:00"
+                y={6.52}
+                r={3}
+                fill="#1d5bf0"
+                stroke="#fff"
+                strokeWidth={1.5}
+              />
             </AreaChart>
           </ResponsiveContainer>
         </div>

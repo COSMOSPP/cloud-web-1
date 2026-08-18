@@ -12,24 +12,24 @@ const getRankBadge = (index: number) => {
 export default function HostMemoryRankingCard() {
   return (
     <Card>
-      <CardHeader className="py-3">
+      <CardHeader>
         <CardTitle>宿主机内存排行</CardTitle>
       </CardHeader>
-      <CardContent className="p-5 space-y-3.5">
+      <CardContent className="p-3.5 sm:p-4 space-y-2.5">
         {hostMemoryRankings.map((item, idx) => (
-          <div key={item.name} className="space-y-1.5">
-            <div className="flex items-center justify-between text-xs">
+          <div key={item.name} className="space-y-1">
+            <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-2">
-                <span className={`w-4 h-4 rounded-md border text-[10px] font-bold flex items-center justify-center ${getRankBadge(idx)}`}>
+                <span className={`w-5 h-5 rounded-lg border text-xs font-extrabold flex items-center justify-center ${getRankBadge(idx)}`}>
                   {idx + 1}
                 </span>
-                <span className="text-slate-700 font-semibold">{item.name}</span>
+                <span className="text-slate-800 font-bold">{item.name}</span>
               </div>
-              <span className="text-slate-500 font-mono font-medium">{item.value}%</span>
+              <span className="text-slate-900 font-mono font-extrabold">{item.value}%</span>
             </div>
-            <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-blue-600 to-sky-300 rounded-full transition-all duration-500"
+                className="h-full bg-gradient-to-r from-blue-600 to-sky-400 rounded-full transition-all duration-500"
                 style={{ width: `${item.value}%` }}
               ></div>
             </div>
